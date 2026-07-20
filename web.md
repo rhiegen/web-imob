@@ -622,6 +622,22 @@ Evitar:
 6. iniciar o servico com `sudo systemctl start imob-admin.service`
 7. validar `sudo systemctl status imob-admin.service` e `GET /health`
 
+### Deploy automatizado por GitHub Actions
+- workflow previsto: `.github/workflows/deploy-vps.yml`
+- disparo manual via `workflow_dispatch`
+- o workflow deve:
+  - gerar o build
+  - empacotar o projeto
+  - enviar o arquivo para a VPS por SSH
+  - descompactar no destino
+  - executar `deploy/setup-vps.sh`
+  - reiniciar `imob-admin.service`
+- secrets esperados no GitHub:
+  - `VPS_HOST`
+  - `VPS_USER`
+  - `VPS_SSH_KEY`
+  - `VPS_DEPLOY_PATH`
+
 ## Banco Supabase
 
 ### Script de criacao completa do banco

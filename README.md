@@ -48,6 +48,16 @@ npm run build
 - `bash ./deploy/install-vps.sh`: instala o projeto em uma VPS Linux
 - `bash ./deploy/setup-vps.sh`: executa banco + instalacao de VPS em sequencia
 
+## GitHub Actions para VPS
+Workflow disponivel:
+- `.github/workflows/deploy-vps.yml`
+
+Secrets esperados no repositório GitHub:
+- `VPS_HOST`
+- `VPS_USER`
+- `VPS_SSH_KEY`
+- `VPS_DEPLOY_PATH`
+
 ## Deploy em VPS
 1. configure o `.env` com `DATABASE_URL`
 2. rode `bash ./deploy/setup-vps.sh`

@@ -1,0 +1,56 @@
+name: Deploy VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Package deploy bundle
+        run: zip -r web-imob-admin-deploy.zip . -x "node_modules/*" "apps/web/node_modules/*" "apps/api/node_modules/*" "packages/shared/node_modules/*" "apps/web/dist/*" "apps/api/dist/*" "packages/shared/dist/*" "deploy/backups/*" ".env"
+
+      - name: Copy project to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "web-imob-admin-deploy.zip"
+          target: ${{ secrets.VPS_DEPLOY_PATH }}
+
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.VPS_DEPLOY_PATH }}"
+            rm -rf web-imob
+            mkdir -p web-imob
+            unzip -o web-imob-admin-deploy.zip -d web-imob
+            cd web-imob
+            if [ ! -f .env ]; then
+              cp .env.example .env
+            fi
+            npm install
+            bash ./deploy/setup-vps.sh
+            sudo systemctl restart imob-admin.service
