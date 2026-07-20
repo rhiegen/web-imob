@@ -96,6 +96,12 @@ Alternativa com container:
 - ou use `docker-compose.vps.yml` para subir a aplicacao com um unico comando
 - ou use `docker-compose.vps.full.yml` para subir app + Nginx em conjunto
 
+Comando unico para Docker + Nginx:
+
+```bash
+bash ./deploy/setup-vps-docker.sh
+```
+
 Arquivos de infraestrutura:
 - `deploy/nginx.conf`
 - `docker-compose.vps.full.yml`

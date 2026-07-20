@@ -572,6 +572,7 @@ Evitar:
 - `deploy/DEPLOY-VPS.md`: guia curto de implantacao em VPS
 - `deploy/nginx.conf`: proxy reverso com Nginx para expor a aplicacao
 - `deploy/PRODUCTION-CHECKLIST.md`: checklist final de publicacao em producao
+- `deploy/setup-vps-docker.sh`: comando unico para primeira subida com Docker + Nginx
 - `deploy/install-vps.sh`: instalacao da aplicacao na VPS
 - `deploy/setup-vps.sh`: comando unico para banco + instalacao na VPS
 - `run-local.sh`: execucao local da aplicacao
@@ -652,6 +653,14 @@ Evitar:
 4. executar `docker compose -f docker-compose.vps.full.yml up -d --build`
 5. validar acesso HTTP na porta 80
 6. usar `deploy/PRODUCTION-CHECKLIST.md` para a publicacao final
+
+### Comando unico para Docker + Nginx
+- executar `bash ./deploy/setup-vps-docker.sh`
+- esse fluxo deve:
+  - gerar secrets ausentes
+  - aplicar schema no banco
+  - subir `web-imob-admin` e `web-imob-nginx`
+  - expor a aplicacao em HTTP na porta 80
 
 ### Deploy automatizado por GitHub Actions
 - workflow previsto: `.github/workflows/deploy-vps.yml`

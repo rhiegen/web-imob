@@ -15,7 +15,8 @@
     "db:seed": "bash ./deploy/seed.sh",
     "db:backup:local": "bash ./deploy/backup-local.sh",
     "secrets:generate": "bash ./deploy/generate-secrets.sh",
-    "deploy:vps": "bash ./deploy/setup-vps.sh"
+    "deploy:vps": "bash ./deploy/setup-vps.sh",
+    "deploy:vps:docker": "bash ./deploy/setup-vps-docker.sh"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
