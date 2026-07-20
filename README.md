@@ -59,10 +59,15 @@ Secrets esperados no repositório GitHub:
 - `VPS_DEPLOY_PATH`
 
 ## Deploy em VPS
-1. configure o `.env` com `DATABASE_URL`
-2. rode `bash ./deploy/setup-vps.sh`
-4. inicie o servico:
+1. copie `.env.vps.example` para `.env`
+2. configure `DATABASE_URL`, `DB_SSL` e `VITE_API_URL`
+3. rode `npm install`
+4. rode `bash ./deploy/setup-vps.sh`
+5. inicie o servico:
 
 ```bash
 sudo systemctl start imob-admin.service
 ```
+
+Guia rapido:
+- `deploy/DEPLOY-VPS.md`

@@ -560,10 +560,12 @@ Evitar:
 - `apps/api/src/server.ts`: API real com CRUD e persistencia PostgreSQL
 - `apps/web/src/App.tsx`: interface real com formularios e listagens
 - `packages/shared/src/index.ts`: tipos e schemas compartilhados
+- `.env.vps.example`: modelo de ambiente para VPS
 - `deploy/init-supabase.sql`: criacao completa do banco e tabelas
 - `deploy/init-supabase.sh`: aplicacao automatica do schema no Supabase
 - `deploy/seed.sql`: carga de dados iniciais reais de exemplo
 - `deploy/seed.sh`: aplicacao automatica do seed
+- `deploy/DEPLOY-VPS.md`: guia curto de implantacao em VPS
 - `deploy/install-vps.sh`: instalacao da aplicacao na VPS
 - `deploy/setup-vps.sh`: comando unico para banco + instalacao na VPS
 - `run-local.sh`: execucao local da aplicacao
@@ -615,7 +617,7 @@ Evitar:
 
 ### Fluxo empacotado para deploy
 1. descompactar o arquivo `.zip` do projeto na VPS
-2. copiar `.env.example` para `.env` e ajustar `DATABASE_URL`
+2. copiar `.env.vps.example` para `.env` e ajustar `DATABASE_URL`, `DB_SSL` e `VITE_API_URL`
 3. executar `npm install`
 4. executar `bash ./deploy/setup-vps.sh`
 5. confirmar que os secrets foram gravados no `.env`
