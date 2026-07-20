@@ -3,9 +3,12 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "baseUrl": ".",
+    "rootDirs": ["./src", "../../packages/shared/src"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@imob/shared": ["../../packages/shared/src/index.ts"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../../packages/shared/src"]
 }

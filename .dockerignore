@@ -1,0 +1,8 @@
+node_modules
+.git
+deploy/backups
+apps/web/dist
+apps/api/dist
+packages/shared/dist
+.env
+*.log

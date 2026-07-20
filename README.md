@@ -39,6 +39,25 @@ npm install
 npm run build
 ```
 
+## Docker
+Build da imagem:
+
+```bash
+docker build -t web-imob-admin .
+```
+
+Execucao do container:
+
+```bash
+docker run --rm -p 3001:3001 --env-file .env web-imob-admin
+```
+
+Ou com compose na VPS:
+
+```bash
+docker compose -f docker-compose.vps.yml up -d --build
+```
+
 ## Scripts principais
 - `./run-local.sh`: sobe o projeto local
 - `bash ./deploy/init-supabase.sh`: cria o banco e as tabelas no Supabase/PostgreSQL
@@ -71,3 +90,7 @@ sudo systemctl start imob-admin.service
 
 Guia rapido:
 - `deploy/DEPLOY-VPS.md`
+
+Alternativa com container:
+- use o `Dockerfile` na raiz do projeto para buildar e executar a aplicacao na VPS
+- ou use `docker-compose.vps.yml` para subir a aplicacao com um unico comando

@@ -560,6 +560,9 @@ Evitar:
 - `apps/api/src/server.ts`: API real com CRUD e persistencia PostgreSQL
 - `apps/web/src/App.tsx`: interface real com formularios e listagens
 - `packages/shared/src/index.ts`: tipos e schemas compartilhados
+- `Dockerfile`: imagem de producao para VPS
+- `.dockerignore`: contexto enxuto para build da imagem
+- `docker-compose.vps.yml`: subida simplificada da aplicacao em container na VPS
 - `.env.vps.example`: modelo de ambiente para VPS
 - `deploy/init-supabase.sql`: criacao completa do banco e tabelas
 - `deploy/init-supabase.sh`: aplicacao automatica do schema no Supabase
@@ -623,6 +626,21 @@ Evitar:
 5. confirmar que os secrets foram gravados no `.env`
 6. iniciar o servico com `sudo systemctl start imob-admin.service`
 7. validar `sudo systemctl status imob-admin.service` e `GET /health`
+
+### Alternativa com Docker na VPS
+1. copiar `.env.vps.example` para `.env`
+2. ajustar `DATABASE_URL`, `DB_SSL` e `VITE_API_URL`
+3. executar `bash ./deploy/init-supabase.sh`
+4. executar `docker build -t web-imob-admin .`
+5. executar `docker run -d --name web-imob-admin --restart always -p 3001:3001 --env-file .env web-imob-admin`
+6. validar `GET /health`
+
+### Alternativa com Docker Compose na VPS
+1. copiar `.env.vps.example` para `.env`
+2. ajustar `DATABASE_URL`, `DB_SSL` e `VITE_API_URL`
+3. executar `bash ./deploy/init-supabase.sh`
+4. executar `docker compose -f docker-compose.vps.yml up -d --build`
+5. validar `GET /health`
 
 ### Deploy automatizado por GitHub Actions
 - workflow previsto: `.github/workflows/deploy-vps.yml`

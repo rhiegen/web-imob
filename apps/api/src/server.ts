@@ -364,7 +364,7 @@ async function listImoveis() {
     order by i.codigo asc
   `);
 
-  return rows.map((row) => ({ ...row, areaGourmetMetrosQuadrados: row.areaGourmetMetrosQuadrados ?? 0 }));
+  return rows.map((row: Imovel) => ({ ...row, areaGourmetMetrosQuadrados: row.areaGourmetMetrosQuadrados ?? 0 }));
 }
 
 async function createImovel(input: ImovelInput) {

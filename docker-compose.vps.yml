@@ -1,0 +1,11 @@
+services:
+  web-imob-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web-imob-admin
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3001:3001"
