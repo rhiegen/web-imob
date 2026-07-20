@@ -94,3 +94,9 @@ Guia rapido:
 Alternativa com container:
 - use o `Dockerfile` na raiz do projeto para buildar e executar a aplicacao na VPS
 - ou use `docker-compose.vps.yml` para subir a aplicacao com um unico comando
+- ou use `docker-compose.vps.full.yml` para subir app + Nginx em conjunto
+
+Arquivos de infraestrutura:
+- `deploy/nginx.conf`
+- `docker-compose.vps.full.yml`
+- `deploy/PRODUCTION-CHECKLIST.md`

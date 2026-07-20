@@ -1,0 +1,22 @@
+services:
+  web-imob-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web-imob-admin
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - "3001"
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: web-imob-nginx
+    restart: always
+    depends_on:
+      - web-imob-admin
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro

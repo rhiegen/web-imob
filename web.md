@@ -563,12 +563,15 @@ Evitar:
 - `Dockerfile`: imagem de producao para VPS
 - `.dockerignore`: contexto enxuto para build da imagem
 - `docker-compose.vps.yml`: subida simplificada da aplicacao em container na VPS
+- `docker-compose.vps.full.yml`: subida conjunta da aplicacao com Nginx
 - `.env.vps.example`: modelo de ambiente para VPS
 - `deploy/init-supabase.sql`: criacao completa do banco e tabelas
 - `deploy/init-supabase.sh`: aplicacao automatica do schema no Supabase
 - `deploy/seed.sql`: carga de dados iniciais reais de exemplo
 - `deploy/seed.sh`: aplicacao automatica do seed
 - `deploy/DEPLOY-VPS.md`: guia curto de implantacao em VPS
+- `deploy/nginx.conf`: proxy reverso com Nginx para expor a aplicacao
+- `deploy/PRODUCTION-CHECKLIST.md`: checklist final de publicacao em producao
 - `deploy/install-vps.sh`: instalacao da aplicacao na VPS
 - `deploy/setup-vps.sh`: comando unico para banco + instalacao na VPS
 - `run-local.sh`: execucao local da aplicacao
@@ -641,6 +644,14 @@ Evitar:
 3. executar `bash ./deploy/init-supabase.sh`
 4. executar `docker compose -f docker-compose.vps.yml up -d --build`
 5. validar `GET /health`
+
+### Alternativa com Docker Compose completo + Nginx
+1. copiar `.env.vps.example` para `.env`
+2. ajustar `DATABASE_URL`, `DB_SSL` e `VITE_API_URL`
+3. executar `bash ./deploy/init-supabase.sh`
+4. executar `docker compose -f docker-compose.vps.full.yml up -d --build`
+5. validar acesso HTTP na porta 80
+6. usar `deploy/PRODUCTION-CHECKLIST.md` para a publicacao final
 
 ### Deploy automatizado por GitHub Actions
 - workflow previsto: `.github/workflows/deploy-vps.yml`
